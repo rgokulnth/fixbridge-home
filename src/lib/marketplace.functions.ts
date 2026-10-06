@@ -241,7 +241,7 @@ export const adminSetKyc = createServerFn({ method: "POST" })
     if (!(await isAdmin(context))) throw new Error("Forbidden");
     const db = await admin();
     const { enqueue } = await import("./notify.server");
-    const patch: Record<string, unknown> = { kyc_status: data.status, kyc_note: data.note ?? null };
+    const patch: any = { kyc_status: data.status, kyc_note: data.note ?? null };
     if (data.razorpayAccountId) patch["razorpay_account_id"] = data.razorpayAccountId;
     if (data.stripeAccountId) patch["stripe_account_id"] = data.stripeAccountId;
     if (data.razorpayAccountId || data.stripeAccountId) patch["payout_status"] = "Active";

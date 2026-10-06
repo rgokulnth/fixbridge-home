@@ -19,9 +19,9 @@ async function rzp(path: string, method: string, body?: unknown) {
   const res = await fetch(`https://api.razorpay.com/v1${path}`, {
     method,
     headers: { Authorization: header, "Content-Type": "application/json" },
-    body: body ? JSON.stringify(body) : undefined,
+    body: body ? JSON.stringify(body) : null,
   });
-  const json = (await res.json()) as Record<string, any>;
+  const json = (await res.json()) as any;
   if (!res.ok) throw new Error(`Razorpay: ${json?.error?.description ?? res.status}`);
   return json;
 }
@@ -91,7 +91,7 @@ async function stripe(path: string, params: Record<string, string>) {
     headers: { Authorization: `Bearer ${stripeKey()}`, "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams(params),
   });
-  const json = (await res.json()) as Record<string, any>;
+  const json = (await res.json()) as any;
   if (!res.ok) throw new Error(`Stripe: ${json?.error?.message ?? res.status}`);
   return json;
 }
@@ -142,7 +142,7 @@ export async function stripeLatestCharge(paymentIntent: string) {
   const res = await fetch(`https://api.stripe.com/v1/payment_intents/${paymentIntent}`, {
     headers: { Authorization: `Bearer ${stripeKey()}` },
   });
-  const json = (await res.json()) as Record<string, any>;
+  const json = (await res.json()) as any;
   if (!res.ok) throw new Error(`Stripe: ${json?.error?.message ?? res.status}`);
   return json.latest_charge as string;
 }
