@@ -137,3 +137,12 @@ export async function stripeVerifyWebhook(rawBody: string, header: string | null
   if (Math.abs(Date.now() / 1000 - Number(t)) > 300) return false;
   return safeEqual(await hmacHex(secret, `${t}.${rawBody}`), v1);
 }
+
+export async function stripeLatestCharge(paymentIntent: string) {
+  const res = await fetch(`https://api.stripe.com/v1/payment_intents/${paymentIntent}`, {
+    headers: { Authorization: `Bearer ${stripeKey()}` },
+  });
+  const json = (await res.json()) as Record<string, any>;
+  if (!res.ok) throw new Error(`Stripe: ${json?.error?.message ?? res.status}`);
+  return json.latest_charge as string;
+}
