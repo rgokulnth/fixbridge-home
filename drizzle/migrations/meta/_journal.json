@@ -8,6 +8,13 @@
       "when": 1791324516712,
       "tag": "0000_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791335688630,
+      "tag": "0001_fixbridge_columns",
+      "breakpoints": true
     }
   ]
 }
