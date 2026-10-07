@@ -48,12 +48,12 @@ function PostProblem() {
     v.src = url;
     await new Promise((r) => (v.onloadedmetadata = r));
     URL.revokeObjectURL(url);
-    if (v.duration > 31) return toast.error("Video must be 30 seconds or less");
+    if (v.duration > 31) { toast.error("Video must be 30 seconds or less"); return; }
     setVideo(f);
   }
 
   async function submit() {
-    if (title.trim().length < 3) return toast.error("Add a short title");
+    if (title.trim().length < 3) { toast.error("Add a short title"); return; }
     setBusy(true);
     try {
       const { data: u } = await supabase.auth.getUser();
