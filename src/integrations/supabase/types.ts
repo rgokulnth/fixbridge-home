@@ -204,6 +204,7 @@ export type Database = {
           pan_path: string | null
           payout_status: string
           phone: string | null
+          photo_path: string | null
           radius_km: number
           rating: number
           rating_count: number
@@ -223,6 +224,7 @@ export type Database = {
           pan_path?: string | null
           payout_status?: string
           phone?: string | null
+          photo_path?: string | null
           radius_km?: number
           rating?: number
           rating_count?: number
@@ -242,6 +244,7 @@ export type Database = {
           pan_path?: string | null
           payout_status?: string
           phone?: string | null
+          photo_path?: string | null
           radius_km?: number
           rating?: number
           rating_count?: number
@@ -502,6 +505,8 @@ export type Database = {
           status: Database["public"]["Enums"]["problem_status"]
           title: string
           urgency: Database["public"]["Enums"]["urgency_level"]
+          video_url: string | null
+          voice_url: string | null
         }
         Insert: {
           budget_max?: number | null
@@ -517,6 +522,8 @@ export type Database = {
           status?: Database["public"]["Enums"]["problem_status"]
           title: string
           urgency?: Database["public"]["Enums"]["urgency_level"]
+          video_url?: string | null
+          voice_url?: string | null
         }
         Update: {
           budget_max?: number | null
@@ -532,6 +539,8 @@ export type Database = {
           status?: Database["public"]["Enums"]["problem_status"]
           title?: string
           urgency?: Database["public"]["Enums"]["urgency_level"]
+          video_url?: string | null
+          voice_url?: string | null
         }
         Relationships: [
           {
@@ -547,27 +556,33 @@ export type Database = {
         Row: {
           amount: number
           created_at: string
+          days: number | null
           description: string
           expert_id: string
           id: string
+          materials: string | null
           problem_id: string
           status: string
         }
         Insert: {
           amount: number
           created_at?: string
+          days?: number | null
           description?: string
           expert_id: string
           id?: string
+          materials?: string | null
           problem_id: string
           status?: string
         }
         Update: {
           amount?: number
           created_at?: string
+          days?: number | null
           description?: string
           expert_id?: string
           id?: string
+          materials?: string | null
           problem_id?: string
           status?: string
         }
@@ -693,6 +708,7 @@ export type Database = {
         | "Pending"
         | "Paid_captured"
         | "Held_in_escrow"
+        | "Release_pending"
         | "Released_to_expert"
         | "Refunded"
       problem_status:
@@ -841,6 +857,7 @@ export const Constants = {
         "Pending",
         "Paid_captured",
         "Held_in_escrow",
+        "Release_pending",
         "Released_to_expert",
         "Refunded",
       ],
